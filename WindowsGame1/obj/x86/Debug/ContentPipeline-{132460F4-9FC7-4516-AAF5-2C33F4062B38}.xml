@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>GameFont.spritefont</Source>
+      <Name>GameFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dainess\Documents\Visual Studio 2013\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\GameFont.xnb</Output>
+      <Time>2015-02-19T14:51:33.3371139-02:00</Time>
+    </Item>
+    <Item>
+      <Source>spr_lives.png</Source>
+      <Name>spr_lives</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dainess\Documents\Visual Studio 2013\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\spr_lives.xnb</Output>
+      <Time>2015-02-19T15:20:59.2031157-02:00</Time>
+    </Item>
+    <Item>
+      <Source>cursorTestin.png</Source>
+      <Name>cursorTestin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dainess\Documents\Visual Studio 2013\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\cursorTestin.xnb</Output>
+      <Time>2015-02-19T17:50:43.0246415-02:00</Time>
+    </Item>
+    <Item>
+      <Source>spr_ball_green.png</Source>
+      <Name>spr_ball_green</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dainess\Documents\Visual Studio 2013\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\spr_ball_green.xnb</Output>
+      <Time>2015-02-19T18:12:31.2314667-02:00</Time>
+    </Item>
+    <Item>
+      <Source>spr_ball_blue.png</Source>
+      <Name>spr_ball_blue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dainess\Documents\Visual Studio 2013\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\spr_ball_blue.xnb</Output>
+      <Time>2015-02-19T18:12:41.1480339-02:00</Time>
+    </Item>
+    <Item>
+      <Source>buttonGame.png</Source>
+      <Name>buttonGame</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dainess\Documents\Visual Studio 2013\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\buttonGame.xnb</Output>
+      <Time>2015-03-01T16:56:13.8808641-03:00</Time>
+    </Item>
+    <Item>
+      <Source>buttonGameBig.png</Source>
+      <Name>buttonGameBig</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dainess\Documents\Visual Studio 2013\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\buttonGameBig.xnb</Output>
+      <Time>2015-03-19T20:10:41.3893262-03:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{132460F4-9FC7-4516-AAF5-2C33F4062B38}</ContentProjectGUID>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\Dainess\Documents\Visual Studio 2013\Projects\WindowsGame1\WindowsGame1\WindowsGame1Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Dainess\Documents\Visual Studio 2013\Projects\WindowsGame1\WindowsGame1\WindowsGame1\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Dainess\Documents\Visual Studio 2013\Projects\WindowsGame1\WindowsGame1\WindowsGame1\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Dainess\Documents\Visual Studio 2013\Projects\WindowsGame1\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2011-09-01T15:22:30-03:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2011-09-01T15:22:30-03:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2011-09-01T15:22:30-03:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2011-09-01T15:22:30-03:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2011-09-01T15:22:30-03:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2011-09-01T15:22:30-03:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2015-01-28T17:58:27.2071213-02:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
