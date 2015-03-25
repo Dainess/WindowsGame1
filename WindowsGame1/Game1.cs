@@ -34,10 +34,15 @@ namespace WindowsGame1
 
         //variáveis dos personagens
         bool  endGame;
-        int count, hp1, hp2, dano, dano2, finalHp1, finalHp2;
+        int count, countTexto, hp1, hp2, dano, dano2, finalHp1, finalHp2;
         Jogador player;
         Monstro monster;
         Randing1 randomize = new Randing1();
+        List<bool> listTexto = new List<bool>();
+       
+
+        //algo sobre o texto que tem que funcionar pra escalar
+        SpriteEffects spriteEffect = new SpriteEffects();
        
         
         
@@ -87,7 +92,7 @@ namespace WindowsGame1
             player.position = new Vector2(62,45);
             monster.position = new Vector2(674, 45);
 
-            player.setTurn(true);
+            player.setTurn(false);
             monster.setTurn(false);
 
             //inicia os botões
@@ -101,9 +106,9 @@ namespace WindowsGame1
             butaoKill.butFace = Content.Load<Texture2D>("buttonGame");
             butaoKill.setActive(false);
 
-            butao4 = new Buttan(new Vector2(599, 348));
-            butao4.butFace = Content.Load<Texture2D>("buttonGame");
-            butao4.setActive(true);
+            butao4 = new Buttan(new Vector2(360, 348));
+            butao4.butFace = Content.Load<Texture2D>("buttonGameBig");
+            butao4.setActive(false);
 
             butaoKillPos = new Vector2(450, 220);
             butaoKill2 = new Buttan(butaoKillPos);
@@ -117,7 +122,7 @@ namespace WindowsGame1
 
             butao5 = new Buttan(butaoPos2 + new Vector2(-40, 250 - 45));
             butao5.butFace = Content.Load<Texture2D>("buttonGameBig");
-            butao5.setActive(false);
+            butao5.setActive(true);
 
             butaoPos3 = new Vector2(272, 300);
             butao3 = new Buttan(butaoPos3);
@@ -129,6 +134,8 @@ namespace WindowsGame1
             muda = Color.White;
             muda2 = Color.Black;
             count = 0;
+            countTexto = 0;
+            listTexto.Add(true);
             // TODO: use this.Content to load your game content here
         }
 
@@ -167,13 +174,14 @@ namespace WindowsGame1
                 {
                     player.win(false);
                     monster.win(true);
+                    player.resetPlayer();
                 }
                 else
                 {
                     player.win(true);
                     monster.win(false);
                 }
-                player.resetPlayer();
+                
                 monster.resetPlayer(randomize);
                 
                 butao3.setActive(true);
@@ -203,6 +211,21 @@ namespace WindowsGame1
                         player.setHp(hp1);
                         player.setTurn(true);
                         monster.setTurn(false);
+                    }
+                    else if (listTexto[countTexto])
+                    {
+                        countTexto++;
+                        if (countTexto < 2)
+                        {
+                            listTexto.Add(true);
+                        }
+                        else
+                        {
+                            butao5.setActive(true);
+                            monster.setTurn(true);
+                            butaoKill.setActive(true);
+                            butaoKill2.setActive(true);
+                        }
                     }
                 }
 
@@ -248,11 +271,15 @@ namespace WindowsGame1
         {
             GraphicsDevice.Clear(Color.Olive);
             spriteBatch.Begin();
-            if (butao4.getActive())
+            if (countTexto == 0)
             {
-                spriteBatch.DrawString(gameFont, "RPG do Mitt esta para comecar. Vence o mais tesudo.", new Vector2(62, 300), Color.White);
-                spriteBatch.DrawString(gameFont, "Aperte nesse botao e e descubra se vc e o tesudo!", new Vector2(62, 320), Color.White);
+                spriteBatch.DrawString(gameFont, "Voce veio a este antigo templo em uma busca.", new Vector2(62, 300), Color.White, 0f, new Vector2(0,0), 0.7f, spriteEffect, 0.0f);
+                spriteBatch.DrawString(gameFont, "Iras descobrir o que as portas de carvalho escondem... se puder", new Vector2(62, 320), Color.White, 0f, new Vector2(0, 0), 0.7f, spriteEffect, 0.0f);
                 butao4.Draw(spriteBatch, Color.White);
+            }
+            else if (countTexto == 1)
+            {
+                spriteBatch.DrawString(gameFont, "As portas de carvalho sao abertas com um clique da macaneta.\nAlgo antigo se materializa, e avanca sedento sobre voc", new Vector2(62, 300), Color.White, 0f, new Vector2(0, 0), 0.7f, spriteEffect, 0.0f);
             }
             else if (endGame)
             {
@@ -264,11 +291,11 @@ namespace WindowsGame1
                 {
                     spriteBatch.DrawString(gameFont, "Player 2 venceu!", new Vector2(62, 352), Color.White);
                 }
-                spriteBatch.DrawString(gameFont, butao3.isActive, new Vector2(62, 382), Color.White);
                 spriteBatch.DrawString(gameFont, "HP: " + Convert.ToString(finalHp1), player.position + new Vector2(0, 30), Color.White);
                 spriteBatch.DrawString(gameFont, "HP: " + Convert.ToString(finalHp2), monster.position + new Vector2(0, 30), Color.White);
                 spriteBatch.DrawString(gameFont, "Cliques: " + Convert.ToString(count), new Vector2(62, 300), Color.White);
             }
+            
             else
             {
                 spriteBatch.DrawString(gameFont, "HP: " + Convert.ToString(player.getHp()), player.position + new Vector2(0, 30), Color.White);
@@ -284,7 +311,6 @@ namespace WindowsGame1
                 spriteBatch.DrawString(gameFont, "Jogador e o verde (jogador 1)", new Vector2(62, 372), Color.White);
                 butaoKill.Draw(spriteBatch, Color.Green);
                 butaoKill2.Draw(spriteBatch, Color.Red);
-                spriteBatch.DrawString(gameFont, "Cliques: " + Convert.ToString(count), new Vector2(62, 300), Color.White);
                 
                 
                
