@@ -28,17 +28,18 @@ namespace WindowsGame1
 
         //variáveis de input
         Vector2 mousePos, butaoPos, butaoPos2, butaoPos3, butaoKillPos;
-        Buttan butao, butao2, butao3, butao4, butao5, butaoKill, butaoKill2;
+        Buttan butao, butao2, butao3, butao4, butaoStart, butaoAv, butaoKill, butaoKill2;
         MouseState currentMouseState, previousMouseState;
         //List<Vector2> Positions = new List<Vector2>();
 
         //variáveis dos personagens
-        bool  endGame;
+        bool endGame;
         int count, countTexto, hp1, hp2, dano, dano2, finalHp1, finalHp2;
         Jogador player;
         Monstro monster;
         Randing1 randomize = new Randing1();
         List<bool> listTexto = new List<bool>();
+        List<string> erroMsg = new List<string>();
        
 
         //algo sobre o texto que tem que funcionar pra escalar
@@ -95,39 +96,44 @@ namespace WindowsGame1
             player.setTurn(false);
             monster.setTurn(false);
 
-            //inicia os botões
-            butaoPos = new Vector2(62, 180);
-            butao = new Buttan(butaoPos);
-            butao.butFace = Content.Load<Texture2D>("buttonGame");
-            butao.setActive(false);
+            //inicia os botões gerais
 
             butaoKillPos = new Vector2(450, 180);
             butaoKill = new Buttan(butaoKillPos);
             butaoKill.butFace = Content.Load<Texture2D>("buttonGame");
             butaoKill.setActive(false);
 
-            butao4 = new Buttan(new Vector2(360, 348));
-            butao4.butFace = Content.Load<Texture2D>("buttonGameBig");
-            butao4.setActive(false);
-
             butaoKillPos = new Vector2(450, 220);
             butaoKill2 = new Buttan(butaoKillPos);
             butaoKill2.butFace = Content.Load<Texture2D>("buttonGame");
             butaoKill2.setActive(false);
 
-            butaoPos2 = monster.position + new Vector2(0, 180 - 45);
-            butao2 = new Buttan(butaoPos2);
+            butaoAv = new Buttan(monster.position + new Vector2(-40, 430 - 90));
+            butaoAv.butFace = Content.Load<Texture2D>("buttonGameBig");
+            butaoAv.setActive(true);
+
+            butaoPos3 = new Vector2(272, 300);
+            butaoStart = new Buttan(butaoPos3);
+            butaoStart.butFace = Content.Load<Texture2D>("buttonGame");
+            butaoStart.setActive(false);
+
+            //Inicia os botões de turno
+
+            butao = new Buttan(new Vector2(62, 180));
+            butao.butFace = Content.Load<Texture2D>("buttonGame");
+            butao.setActive(false);
+
+            butao2 = new Buttan(new Vector2(146, 180));
             butao2.butFace = Content.Load<Texture2D>("buttonGame");
             butao2.setActive(false);
 
-            butao5 = new Buttan(butaoPos2 + new Vector2(-40, 250 - 45));
-            butao5.butFace = Content.Load<Texture2D>("buttonGameBig");
-            butao5.setActive(true);
-
-            butaoPos3 = new Vector2(272, 300);
-            butao3 = new Buttan(butaoPos3);
+            butao3 = new Buttan(new Vector2(62, 202));
             butao3.butFace = Content.Load<Texture2D>("buttonGame");
             butao3.setActive(false);
+
+            butao4 = new Buttan(new Vector2(146, 202));
+            butao4.butFace = Content.Load<Texture2D>("buttonGame");
+            butao4.setActive(false);
 
 
             endGame = false;
@@ -136,6 +142,8 @@ namespace WindowsGame1
             count = 0;
             countTexto = 0;
             listTexto.Add(true);
+            erroMsg.Add("");
+            erroMsg.Add("Não há ki insuficiente");
             // TODO: use this.Content to load your game content here
         }
 
@@ -184,24 +192,23 @@ namespace WindowsGame1
                 
                 monster.resetPlayer(randomize);
                 
-                butao3.setActive(true);
-                butao5.setActive(false);
+                butaoStart.setActive(true);
+                butaoAv.setActive(false);
 
             }
 
             if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
             {
-                if (mousePos.X >= butao5.getPosition().X && mousePos.Y >= butao5.getPosition().Y &&
-                    mousePos.X <= (butao5.getPosition().X + 64) && mousePos.Y <= (butao5.getPosition().Y + 20) && butao5.getActive())
+                if (mousePos.X >= butaoAv.getPosition().X && mousePos.Y >= butaoAv.getPosition().Y &&
+                    mousePos.X <= (butaoAv.getPosition().X + 64) && mousePos.Y <= (butaoAv.getPosition().Y + 20) && butaoAv.getActive())
                 {
                     if (player.getTurn())
                     {
-                        count = count + 1;
-                        dano2 = player.getAtk() + randomize.Random(1, 4) - monster.getDef();
-                        hp2 = monster.getHp() - (dano2);
-                        monster.setHp(hp2);
-                        monster.setTurn(true);
-                        player.setTurn(false);
+                        butao.setActive(true);
+                        butao2.setActive(true);
+                        butao3.setActive(true);
+                        butao4.setActive(true);
+                        butaoAv.setActive(false);
                     }
                     else if (monster.getTurn())
                     {
@@ -221,7 +228,7 @@ namespace WindowsGame1
                         }
                         else
                         {
-                            butao5.setActive(true);
+                            butaoAv.setActive(true);
                             monster.setTurn(true);
                             butaoKill.setActive(true);
                             butaoKill2.setActive(true);
@@ -229,13 +236,55 @@ namespace WindowsGame1
                     }
                 }
 
+                else if (mousePos.X >= butao.getPosition().X && mousePos.Y >= butao.getPosition().Y &&
+                    mousePos.X <= (butao.getPosition().X + 64) && mousePos.Y <= (butao.getPosition().Y + 20) && butao.getActive())
+                {
+                        count = count + 1;
+                        dano2 = player.getAtk() + randomize.Random(1, 4) - monster.getDef();
+                        hp2 = monster.getHp() - (dano2);
+                        player.setKi(player.getKi() + 1);
+                        if (player.getKi() >= 2)
+                            player.setWarning(0);
+                        monster.setHp(hp2);
+                        monster.setTurn(true);
+                        player.setTurn(false);
+                        butao.setActive(false);
+                        butao2.setActive(false);
+                        butao3.setActive(false);
+                        butao4.setActive(false);
+                        butaoAv.setActive(true);
+                }
 
-                else if (mousePos.X >= butao3.getPosition().X && mousePos.Y >= butao3.getPosition().Y &&
-                    mousePos.X <= (butao3.getPosition().X + 64) && mousePos.Y <= (butao3.getPosition().Y + 20) && butao3.getActive())
+                else if (mousePos.X >= butao2.getPosition().X && mousePos.Y >= butao2.getPosition().Y &&
+                mousePos.X <= (butao2.getPosition().X + 64) && mousePos.Y <= (butao2.getPosition().Y + 20) && butao.getActive())
+                {
+                    if (player.getKi() < 2)
+                    {
+                        player.setWarning(1);
+                    }
+                    else
+                    {
+                        dano2 = player.getAtk() + randomize.Random(1, 4)*2 - monster.getDef();
+                        hp2 = monster.getHp() - (dano2);
+                        monster.setHp(hp2);
+                        player.dropKi(2);
+                        monster.setTurn(true);
+                        player.setTurn(false);
+                        butao.setActive(false);
+                        butao2.setActive(false);
+                        butao3.setActive(false);
+                        butao4.setActive(false);
+                        butaoAv.setActive(true);
+                    }
+                }
+
+
+                else if (mousePos.X >= butaoStart.getPosition().X && mousePos.Y >= butaoStart.getPosition().Y &&
+                    mousePos.X <= (butaoStart.getPosition().X + 64) && mousePos.Y <= (butaoStart.getPosition().Y + 20) && butaoStart.getActive())
                 {
                     endGame = false;
-                    butao5.setActive(true);
-                    butao3.setActive(false);
+                    butaoAv.setActive(true);
+                    butaoStart.setActive(false);
                 }
                 else if (mousePos.X >= butaoKill.getPosition().X && mousePos.Y >= butaoKill.getPosition().Y &&
                     mousePos.X <= (butaoKill.getPosition().X + 64) && mousePos.Y <= (butaoKill.getPosition().Y + 20) && butaoKill.getActive())
@@ -246,14 +295,6 @@ namespace WindowsGame1
                     mousePos.X <= (butaoKill2.getPosition().X + 64) && mousePos.Y <= (butaoKill2.getPosition().Y + 20) && butaoKill2.getActive())
                 {
                     monster.setHp(0);
-                }
-                else if (mousePos.X >= butao4.getPosition().X && mousePos.Y >= butao4.getPosition().Y &&
-                    mousePos.X <= (butao4.getPosition().X + 64) && mousePos.Y <= (butao4.getPosition().Y + 20) && butao4.getActive())
-                {
-                    butao5.setActive(true);
-                    butao4.setActive(false);
-                    butaoKill.setActive(true);
-                    butaoKill2.setActive(true);
                 }
 
 
@@ -273,13 +314,12 @@ namespace WindowsGame1
             spriteBatch.Begin();
             if (countTexto == 0)
             {
-                spriteBatch.DrawString(gameFont, "Voce veio a este antigo templo em uma busca.", new Vector2(62, 300), Color.White, 0f, new Vector2(0,0), 0.7f, spriteEffect, 0.0f);
-                spriteBatch.DrawString(gameFont, "Iras descobrir o que as portas de carvalho escondem... se puder", new Vector2(62, 320), Color.White, 0f, new Vector2(0, 0), 0.7f, spriteEffect, 0.0f);
-                butao4.Draw(spriteBatch, Color.White);
+                spriteBatch.DrawString(gameFont, "Você veio a este antigo templo em uma busca.", new Vector2(62, 300), Color.White, 0f, new Vector2(0,0), 0.7f, spriteEffect, 0.0f);
+                spriteBatch.DrawString(gameFont, "Irás descobrir o que as portas de carvalho escondem... se puder", new Vector2(62, 320), Color.White, 0f, new Vector2(0, 0), 0.7f, spriteEffect, 0.0f);
             }
             else if (countTexto == 1)
             {
-                spriteBatch.DrawString(gameFont, "As portas de carvalho sao abertas com um clique da macaneta.\nAlgo antigo se materializa, e avanca sedento sobre voc", new Vector2(62, 300), Color.White, 0f, new Vector2(0, 0), 0.7f, spriteEffect, 0.0f);
+                spriteBatch.DrawString(gameFont, "As portas de carvalho são abertas com um clique da maçaneta.\nAlgo antigo se materializa, e avança sedento sobre você", new Vector2(62, 300), Color.White, 0f, new Vector2(0, 0), 0.7f, spriteEffect, 0.0f);
             }
             else if (endGame)
             {
@@ -309,19 +349,29 @@ namespace WindowsGame1
                 else
                     spriteBatch.DrawString(gameFont, "Jogador 2 perdeu: " + Convert.ToString(dano2) + " pontos de vida", new Vector2(62, 352), Color.White);
                 spriteBatch.DrawString(gameFont, "Jogador e o verde (jogador 1)", new Vector2(62, 372), Color.White);
-                butaoKill.Draw(spriteBatch, Color.Green);
-                butaoKill2.Draw(spriteBatch, Color.Red);
+                butaoKill.Draw(spriteBatch, Color.Black);
+                butaoKill2.Draw(spriteBatch, Color.Purple);
+
+                if (player.getTurn() && !butaoAv.getActive())
+                {
+                    butao.Draw(spriteBatch, Color.Red);
+                    butao2.Draw(spriteBatch, Color.White);
+                    butao3.Draw(spriteBatch, Color.Green);
+                    butao4.Draw(spriteBatch, Color.Yellow);
+                }
                 
-                
+                if (player.getWarning() == 1)
+                    spriteBatch.DrawString(gameFont, erroMsg[player.getWarning()], new Vector2(62, 320), Color.White);
+
                
                 
             }
-            if (butao5.getActive())
+            if (butaoAv.getActive())
             {
-                butao5.Draw(spriteBatch, Color.White);
+                butaoAv.Draw(spriteBatch, Color.White);
             }
-            else if (butao3.getActive())
-                butao3.Draw(spriteBatch, Color.White);
+            else if (butaoStart.getActive())
+                butaoStart.Draw(spriteBatch, Color.White);
 
             spriteBatch.Draw(cursor, mousePos, Color.White);
             player.Draw(spriteBatch);

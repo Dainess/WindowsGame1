@@ -13,6 +13,10 @@ namespace WindowsGame1
             atk = randomize1.Random(4, 6);
             def = randomize1.Random(1, 3);
             winning = false;
+            for (int i = 0; i < acaoTurno.Length; i++)
+            {
+                acaoTurno[i] = false;
+            }
         }
 
     }
